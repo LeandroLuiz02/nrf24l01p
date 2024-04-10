@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;devProject/Core/Inc/sx1280-hal.h&apos; to &apos;sx1280-hal&apos;" description="Rename resource &apos;sx1280-hal.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/sx1280-hal.h" name="sx1280-hal" stamp="1712583794595" updateReferences="true"/>
+</session>
