@@ -57,11 +57,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 /* USER CODE BEGIN 0 */
 
 // TRANSMITTER CODE SESSION
-// data array to be sent
-//uint8_t tx_data[NRF24L01P_PAYLOAD_LENGTH] = {0, 1, 2, 3, 4, 5, 6, 7};
 
-// RECEIVER CODE SESSION
- uint8_t rx_data[NRF24L01P_PAYLOAD_LENGTH] = { 0, };
+uint8_t tx_data[NRF24L01P_PAYLOAD_LENGTH] = {0, 1, 2, 3, 4, 5, 6, 7};
 
 /* USER CODE END 0 */
 
@@ -96,11 +93,10 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
-  // TRANSMITTER CODE SESSION
-//  nrf24l01p_tx_init(2500, _1Mbps);
+  nrf24l01p_tx_init(2500, _1Mbps);
 
   // RECEIVER CODE SESSION
-  nrf24l01p_rx_init(2500, _1Mbps);
+
 
   /* USER CODE END 2 */
 
@@ -108,17 +104,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  // TRANSMITTER CODE SESSION
-	  // change tx datas
-//	  for(int i= 0; i < 8; i++)
-//		  tx_data[i]++;
-//
-//	  // transmit
-//	  nrf24l01p_tx_transmit(tx_data);
-//	  HAL_Delay(100);
+	  for(int i= 0; i < 8; i++)
+		  tx_data[i]++;
 
-	  // RECEIVER CODE SESSION
-	  HAL_Delay(50);
+	  // transmit
+	  nrf24l01p_tx_transmit(tx_data);
+	  HAL_Delay(10);
+
 
     /* USER CODE END WHILE */
 
@@ -171,14 +163,8 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	// TRANSMITTER CODE SESSION
-//	if(GPIO_Pin == NRF24L01P_IRQ_PIN_NUMBER)
-//		nrf24l01p_tx_irq(); // clear interrupt flag
-
-	// RECEIVER CODE SESSION
 	if(GPIO_Pin == NRF24L01P_IRQ_PIN_NUMBER)
-			nrf24l01p_rx_receive(rx_data); // read data when data ready flag is set
-
+		nrf24l01p_tx_irq(); // clear interrupt flag
 }
 /* USER CODE END 4 */
 

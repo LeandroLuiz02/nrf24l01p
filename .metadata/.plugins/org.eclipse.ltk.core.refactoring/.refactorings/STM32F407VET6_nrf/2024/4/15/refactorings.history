@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;devProject.ioc&apos; to &apos;STM32F407VET6_nrf&apos;" description="Move &apos;devProject.ioc&apos; to &apos;STM32F407VET6_nrf&apos;" destination="/STM32F407VET6_nrf" element1="/devProject/devProject.ioc" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1712966325462" updateReferences="true"/>
+</session>

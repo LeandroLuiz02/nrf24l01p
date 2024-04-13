@@ -1,10 +1,10 @@
-18:46:53 **** Incremental Build of configuration Debug for project STM32F407VET6_nrf ****
+15:15:26 **** Incremental Build of configuration Debug for project STM32F407VET6_nrf ****
 make -j4 all 
 arm-none-eabi-size   STM32F407VET6_nrf.elf 
    text	   data	    bss	    dec	    hex	filename
-  10596	     20	   1668	  12284	   2ffc	STM32F407VET6_nrf.elf
+  10700	     28	   1660	  12388	   3064	STM32F407VET6_nrf.elf
 Finished building: default.size.stdout
  
 
-18:46:53 Build Finished. 0 errors, 0 warnings. (took 712ms)
+15:15:27 Build Finished. 0 errors, 0 warnings. (took 734ms)
 
