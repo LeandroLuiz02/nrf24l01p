@@ -1,10 +1,17 @@
-15:25:59 **** Incremental Build of configuration Debug for project STM32F407VET6_nrf_Receiver ****
+19:34:15 **** Incremental Build of configuration Debug for project STM32F407VET6_nrf_Receiver ****
 make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "STM32F407VET6_nrf_Receiver.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/leandro/Documentos/code/micro/dev/STM32F407VET6_nrf_Receiver/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F407VET6_nrf_Receiver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F407VET6_nrf_Receiver.elf
+ 
 arm-none-eabi-size   STM32F407VET6_nrf_Receiver.elf 
+arm-none-eabi-objdump -h -S  STM32F407VET6_nrf_Receiver.elf  > "STM32F407VET6_nrf_Receiver.list"
    text	   data	    bss	    dec	    hex	filename
   10516	     20	   1668	  12204	   2fac	STM32F407VET6_nrf_Receiver.elf
 Finished building: default.size.stdout
  
+Finished building: STM32F407VET6_nrf_Receiver.list
+ 
 
-15:26:00 Build Finished. 0 errors, 0 warnings. (took 635ms)
+19:34:16 Build Finished. 0 errors, 0 warnings. (took 941ms)
 
