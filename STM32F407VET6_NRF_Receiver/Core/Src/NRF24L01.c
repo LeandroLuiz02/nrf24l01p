@@ -261,7 +261,7 @@ void HAL_NRF24_transmitData(uint8_t *Data)
 	
 	HAL_NRF24_CS_select();
 	
-	HAL_SPI_Transmit(NRF_Handler,&cmd_to_send,1,1000); // Transmit Command
+	HAL_SPI_Transmit(NRF_Handler,&cmd_to_send,1,100); // Transmit Command
 	
 	HAL_SPI_Transmit(NRF_Handler,Data,32,1000); // Send 32 bytes of data
 	
@@ -273,8 +273,8 @@ void HAL_NRF24_transmitData(uint8_t *Data)
 	
 	if((fifoStatus & (1<<4)) && (!(fifoStatus &(1<<3)))) // To check that fifo is empty and data is sent
 		{
-			cmd_to_send = FLUSH_TX;
-			HAL_NRF24_sendCommand(cmd_to_send);
+			//cmd_to_send = FLUSH_TX;
+			//HAL_NRF24_sendCommand(cmd_to_send);
 			HAL_NRF24_resetRegister(FIFO_STATUS_REG); //  Reset FIFO
 			HAL_GPIO_TogglePin(LED_GPIO_Port,LED_Pin); 
 		}
@@ -294,23 +294,30 @@ void HAL_NRF24_RXModeConfig(uint8_t *Address,uint8_t Channel)
 	HAL_NRF24_setRFChannel(Channel); // Select the channel (0:6 bits of data)
 	
 	uint8_t EN_RXADDRReg = HAL_NRF24_readReg(EN_RXADDR_REG);
+	/*
+	EN_RXADDRReg = EN_RXADDRReg | (1<<0);
 	
-	EN_RXADDRReg = EN_RXADDRReg | (1<<1);
+	HAL_NRF24_writeReg(EN_RXADDR_REG,EN_RXADDRReg); // Enable Data pipe 1 
+	
+	HAL_NRF24_writeRegMulti(RX_ADDR_P0_REG,Address,5); // Setup RX Pipe1 adresses
+	
+	HAL_NRF24_writeReg(RX_PW_P0_REG,32); // 32 bytes payload
+	
+	*/
+	
+	EN_RXADDRReg = EN_RXADDRReg | (1<<2);
 	
 	HAL_NRF24_writeReg(EN_RXADDR_REG,EN_RXADDRReg); // Enable Data pipe 1 
 	
 	HAL_NRF24_writeRegMulti(RX_ADDR_P1_REG,Address,5); // Setup RX Pipe1 adresses
 	
-	HAL_NRF24_writeReg(RX_PW_P1_REG,32); // 32 bytes payload
+	HAL_NRF24_writeReg(RX_ADDR_P2_REG,'A');
 	
-	//HAL_NRF24_setOperationalMode(TransceiverMode_RX);
+	HAL_NRF24_writeReg(RX_PW_P2_REG,9); // 32 bytes payload
 	
-	//HAL_NRF24_setPowerMode(PowerControl_PowerUp);
-	uint8_t configRegData = HAL_NRF24_readReg(CONFIG_REG); // Modify REG without changing its old value
+	HAL_NRF24_setOperationalMode(TransceiverMode_RX);
 	
-	configRegData = configRegData | (1<<1) | (1<<0); // Power up NRF , Enable RX Mode
-	
-	HAL_NRF24_writeReg(CONFIG_REG,configRegData); // Power up NRF
+	HAL_NRF24_setPowerMode(PowerControl_PowerUp);
 	
 	HAL_NRF24_CE_enable(); // Enable NRF
 	
@@ -341,7 +348,7 @@ void HAL_NRF24_receiveData(uint8_t *Data)
 {
 	
 	
-//	HAL_NRF24_sendCommand(R_RX_PAYLOAD); // Write TX-payload: 1 – 32 bytes.
+//	HAL_NRF24_sendCommand(R_RX_PAYLOAD); // Write TX-payload: 1 ï¿½ 32 bytes.
 	
 	uint8_t cmd_to_send = 0;
 	
@@ -351,7 +358,7 @@ void HAL_NRF24_receiveData(uint8_t *Data)
 	
 	HAL_SPI_Transmit(NRF_Handler,&cmd_to_send,1,1000);
 	
-	HAL_SPI_Receive(NRF_Handler,Data,32,1000); // Send 32 bytes of data
+	HAL_SPI_Receive(NRF_Handler,Data,9,1000); // Send 9 bytes of data
 	
 	HAL_NRF24_CS_unSelect();
 	
