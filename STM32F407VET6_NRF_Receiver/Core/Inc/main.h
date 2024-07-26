@@ -50,6 +50,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -58,14 +60,56 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED1_Pin GPIO_PIN_6
-#define LED1_GPIO_Port GPIOA
-#define LED2_Pin GPIO_PIN_7
-#define LED2_GPIO_Port GPIOA
-#define CE_Pin GPIO_PIN_6
-#define CE_GPIO_Port GPIOB
-#define CSN_Pin GPIO_PIN_7
-#define CSN_GPIO_Port GPIOB
+#define H2_M2_Pin GPIO_PIN_2
+#define H2_M2_GPIO_Port GPIOE
+#define H1_M2_Pin GPIO_PIN_4
+#define H1_M2_GPIO_Port GPIOE
+#define FWD_REV_M2_Pin GPIO_PIN_6
+#define FWD_REV_M2_GPIO_Port GPIOE
+#define DISPARO_NORMAL_Pin GPIO_PIN_13
+#define DISPARO_NORMAL_GPIO_Port GPIOC
+#define EN_M2_Pin GPIO_PIN_0
+#define EN_M2_GPIO_Port GPIOC
+#define FWD_REV_M1_Pin GPIO_PIN_2
+#define FWD_REV_M1_GPIO_Port GPIOC
+#define DRIBLE_Pin GPIO_PIN_0
+#define DRIBLE_GPIO_Port GPIOA
+#define BUZZER_Pin GPIO_PIN_3
+#define BUZZER_GPIO_Port GPIOA
+#define EN_M1_Pin GPIO_PIN_4
+#define EN_M1_GPIO_Port GPIOA
+#define CSN_Pin GPIO_PIN_4
+#define CSN_GPIO_Port GPIOC
+#define CE_Pin GPIO_PIN_5
+#define CE_GPIO_Port GPIOC
+#define PWM_RODA_1_Pin GPIO_PIN_0
+#define PWM_RODA_1_GPIO_Port GPIOB
+#define H2_M3_Pin GPIO_PIN_15
+#define H2_M3_GPIO_Port GPIOB
+#define H1_M3_Pin GPIO_PIN_9
+#define H1_M3_GPIO_Port GPIOD
+#define PWM_RODA_3_Pin GPIO_PIN_7
+#define PWM_RODA_3_GPIO_Port GPIOC
+#define PWM_RODA_4_Pin GPIO_PIN_9
+#define PWM_RODA_4_GPIO_Port GPIOC
+#define FWD_REV_M3_Pin GPIO_PIN_11
+#define FWD_REV_M3_GPIO_Port GPIOA
+#define CEA15_Pin GPIO_PIN_15
+#define CEA15_GPIO_Port GPIOA
+#define CSND0_Pin GPIO_PIN_0
+#define CSND0_GPIO_Port GPIOD
+#define EN_M3_Pin GPIO_PIN_4
+#define EN_M3_GPIO_Port GPIOD
+#define FWD_REV_M4_Pin GPIO_PIN_6
+#define FWD_REV_M4_GPIO_Port GPIOD
+#define CE_1_Pin GPIO_PIN_6
+#define CE_1_GPIO_Port GPIOB
+#define CS_1_Pin GPIO_PIN_7
+#define CS_1_GPIO_Port GPIOB
+#define H1_M4_Pin GPIO_PIN_8
+#define H1_M4_GPIO_Port GPIOB
+#define H2_M4_Pin GPIO_PIN_0
+#define H2_M4_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

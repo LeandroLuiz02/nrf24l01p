@@ -1284,3 +1284,18 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 /home/leandro/Documentos
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-04-23 11:43:57.293
 !MESSAGE Started RMI Server, listening on port 41338
+
+!ENTRY org.eclipse.core.resources 2 2 2024-07-26 19:20:27.415
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2024-07-26 19:20:27.415
+!MESSAGE The project description file (.project) for 'STM32H747XI_SuportProject' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2024-07-26 19:20:27.415
+!MESSAGE The project description file (.project) for 'STM32H747XI_SuportProject_CM4' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2024-07-26 19:20:27.415
+!MESSAGE The project description file (.project) for 'STM32H747XI_SuportProject_CM7' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2024-07-26 19:59:24.501
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 21 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2024-07-26 19:59:24.501
+!MESSAGE Existing sessions are:

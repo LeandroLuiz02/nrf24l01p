@@ -26,7 +26,12 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef struct {
+	char control;
+	float vx, vy, vw;
+	char solenoidPower;
+	uint16_t crc;
+} ControlPacket;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -45,7 +50,7 @@ SPI_HandleTypeDef hspi1;
 /* USER CODE BEGIN PV */
 uint8_t TxAdress[] = {'A','S','U','R','T'};
 
-uint8_t TranMesgToNRF[9] = {1,2,3,4,5,6,7,8,9};
+ControlPacket controlPacket;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,8 +73,13 @@ static void MX_SPI1_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
+	controlPacket.control = 1;
+	controlPacket.vx = 0;
+	controlPacket.vy = 0;
+	controlPacket.vw = 0;
+	controlPacket.solenoidPower = 2;
+	controlPacket.crc = 4;
+	/* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -92,7 +102,6 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   HAL_NRF24_init();
-
   HAL_NRF24_TXModeConfig(TxAdress,123); // Channel Number is 123
   /* USER CODE END 2 */
 
@@ -100,14 +109,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  for (int i = 0; i < 9; i++)
+	  for (int i = 0; i <= 1000; i++)
 	  {
-		  TranMesgToNRF[i]++;
-		  if (TranMesgToNRF[i] >= 21) TranMesgToNRF[i] = 0;
+//		  HAL_Delay(500);
+		  controlPacket.vw = i;
+
+		  HAL_NRF24_transmitData(&controlPacket);
 	  }
 
-	  HAL_NRF24_transmitData(TranMesgToNRF);
-	  HAL_Delay(500);
+//	  HAL_Delay(50);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

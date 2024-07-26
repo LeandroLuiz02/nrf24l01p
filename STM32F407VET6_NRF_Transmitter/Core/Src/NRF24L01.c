@@ -263,7 +263,7 @@ void HAL_NRF24_transmitData(uint8_t *Data)
 	
 	HAL_SPI_Transmit(NRF_Handler,&cmd_to_send,1,100); // Transmit Command
 	
-	HAL_SPI_Transmit(NRF_Handler,Data,9,1000); // Send 32 bytes of data
+	HAL_SPI_Transmit(NRF_Handler,Data,32,1000); // Send 32 bytes of data
 	
 	HAL_NRF24_CS_unSelect();
 	
@@ -348,7 +348,7 @@ void HAL_NRF24_receiveData(uint8_t *Data)
 {
 	
 	
-//	HAL_NRF24_sendCommand(R_RX_PAYLOAD); // Write TX-payload: 1 – 32 bytes.
+//	HAL_NRF24_sendCommand(R_RX_PAYLOAD); // Write TX-payload: 1 ï¿½ 32 bytes.
 	
 	uint8_t cmd_to_send = 0;
 	

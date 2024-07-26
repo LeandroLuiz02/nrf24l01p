@@ -1,0 +1,28 @@
+19:59:16 **** Incremental Build of configuration Debug for project STM32F407VET6_NRF_Transmitter ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:117:42: warning: passing argument 1 of 'HAL_NRF24_transmitData' from incompatible pointer type [-Wincompatible-pointer-types]
+  117 |                   HAL_NRF24_transmitData(&controlPacket);
+      |                                          ^~~~~~~~~~~~~~
+      |                                          |
+      |                                          ControlPacket *
+In file included from ../Core/Inc/main.h:34,
+                 from ../Core/Src/main.c:20:
+../Core/Inc/NRF24L01.h:232:38: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'ControlPacket *'
+  232 | void HAL_NRF24_transmitData(uint8_t *Data);
+      |                             ~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "STM32F407VET6_NRF_Transmitter.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/leandro/Documents/code/micro/dev/STM32F407VET6_NRF_Transmitter/STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F407VET6_NRF_Transmitter.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: STM32F407VET6_NRF_Transmitter.elf
+ 
+arm-none-eabi-size   STM32F407VET6_NRF_Transmitter.elf 
+arm-none-eabi-objdump -h -S  STM32F407VET6_NRF_Transmitter.elf  > "STM32F407VET6_NRF_Transmitter.list"
+   text	   data	    bss	    dec	    hex	filename
+  10356	     28	   1676	  12060	   2f1c	STM32F407VET6_NRF_Transmitter.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32F407VET6_NRF_Transmitter.list
+ 
+
+19:59:17 Build Finished. 0 errors, 1 warnings. (took 942ms)
+
