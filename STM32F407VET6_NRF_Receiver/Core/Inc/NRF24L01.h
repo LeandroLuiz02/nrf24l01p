@@ -10,7 +10,7 @@ Date   : 19/12/2022
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_gpio.h"
 #include "stdint.h"
-
+#include "main.h"
 
 /*------------------------ Global Varaibles ----------------------------------*/
 
@@ -23,10 +23,6 @@ extern SPI_HandleTypeDef hspi1;
 /* Private defines -----------------------------------------------------------*/
 #define LED_Pin GPIO_PIN_6
 #define LED_GPIO_Port GPIOA
-#define CSN_Pin GPIO_PIN_7
-#define CSN_GPIO_Port GPIOB
-#define CE_Pin GPIO_PIN_6
-#define CE_GPIO_Port GPIOB
 
 #define  NRF_Handler &hspi1
 
@@ -244,7 +240,7 @@ uint8_t HAL_NRF24_isDataAvailable(uint8_t pipeNumber);
 /*
 -Description : Recive Data in buffer from NRF
 */
-void HAL_NRF24_receiveData(uint8_t *Data);
+void HAL_NRF24_receiveData(uint8_t *Data, int size);
 
 /*
 -Description : Reset Regitsers values
