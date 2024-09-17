@@ -21,12 +21,17 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef struct {
+	char control;
+	float vx, vy, vw;
+	char solenoidPower;
+	uint16_t crc;
+} ControlPacket;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -63,7 +68,8 @@ static void MX_TIM2_Init(void);
 /* USER CODE BEGIN 0 */
 uint8_t TxAdress[] = {'A','S','U','R','T'};
 
-uint8_t RxData[9];
+uint8_t buffer[sizeof(ControlPacket)];
+ControlPacket controlPacket;
 
 /* USER CODE END 0 */
 
@@ -110,7 +116,8 @@ int main(void)
   {
 	  if(HAL_NRF24_isDataAvailable(DATA_PIPE_NUMBER) == TRUE)
 	  {
-	  		HAL_NRF24_receiveData(RxData, sizeof(RxData));
+	  		HAL_NRF24_receiveData(buffer, sizeof(buffer));
+	  		memcpy(&controlPacket, buffer, sizeof(ControlPacket));
 	  }
     /* USER CODE END WHILE */
 

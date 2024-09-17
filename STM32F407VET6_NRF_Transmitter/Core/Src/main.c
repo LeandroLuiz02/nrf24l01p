@@ -49,7 +49,7 @@ SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
 uint8_t TxAdress[] = {'A','S','U','R','T'};
-uint8_t buffer[9] = {1,2,3,4,5,6,7,8,9};
+uint8_t buffer[sizeof(ControlPacket)];
 ControlPacket controlPacket;
 /* USER CODE END PV */
 
@@ -79,6 +79,7 @@ int main(void)
 	controlPacket.vw = 0;
 	controlPacket.solenoidPower = 2;
 	controlPacket.crc = 4;
+	memcpy(buffer, &controlPacket, sizeof(ControlPacket));
 	/* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -109,18 +110,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  HAL_NRF24_transmitData(buffer);
+	  HAL_Delay(100);
 
-
-
-	  for (int i = 0; i < 91; i++)
-	  {
-		  for (int j = 0; j <= 8; j++)
-		  {
-			  buffer[j] = j + i;
-		  }
-		  HAL_NRF24_transmitData(buffer);
-		  HAL_Delay(100);
-	  }
+	  controlPacket.vx++;
+	  memcpy(buffer, &controlPacket, sizeof(ControlPacket));
 
 //	  HAL_Delay(50);
     /* USER CODE END WHILE */
