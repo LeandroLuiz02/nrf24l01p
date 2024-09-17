@@ -1196,7 +1196,7 @@ int main(void)
  8000968:	2b01      	cmp	r3, #1
  800096a:	d1f9      	bne.n	8000960 <main+0x28>
 	  {
-	  		HAL_NRF24_receiveData(buffer, sizeof(buffer));
+	  		HAL_NRF24_receiveData(buffer, sizeof(ControlPacket));
  800096c:	2114      	movs	r1, #20
  800096e:	4807      	ldr	r0, [pc, #28]	@ (800098c <main+0x54>)
  8000970:	f7ff ff7c 	bl	800086c <HAL_NRF24_receiveData>

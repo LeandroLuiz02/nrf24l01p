@@ -116,7 +116,7 @@ int main(void)
   {
 	  if(HAL_NRF24_isDataAvailable(DATA_PIPE_NUMBER) == TRUE)
 	  {
-	  		HAL_NRF24_receiveData(buffer, sizeof(buffer));
+	  		HAL_NRF24_receiveData(buffer, sizeof(ControlPacket));
 	  		memcpy(&controlPacket, buffer, sizeof(ControlPacket));
 	  }
     /* USER CODE END WHILE */
