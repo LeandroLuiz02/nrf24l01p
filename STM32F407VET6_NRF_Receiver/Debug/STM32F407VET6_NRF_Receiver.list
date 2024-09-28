@@ -1180,8 +1180,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_NRF24_init();
  8000954:	f7ff ff06 	bl	8000764 <HAL_NRF24_init>
-  HAL_NRF24_RXModeConfig(TxAdress,90);
- 8000958:	215a      	movs	r1, #90	@ 0x5a
+  HAL_NRF24_RXModeConfig(TxAdress,123);
+ 8000958:	217b      	movs	r1, #123	@ 0x7b
  800095a:	480b      	ldr	r0, [pc, #44]	@ (8000988 <main+0x50>)
  800095c:	f7ff ff25 	bl	80007aa <HAL_NRF24_RXModeConfig>
 

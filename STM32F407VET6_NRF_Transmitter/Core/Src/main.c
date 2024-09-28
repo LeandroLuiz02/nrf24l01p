@@ -47,23 +47,32 @@ typedef struct {
 /* Private variables ---------------------------------------------------------*/
 SPI_HandleTypeDef hspi3;
 
+UART_HandleTypeDef huart6;
+
 /* USER CODE BEGIN PV */
 uint8_t TxAdress[] = {'A','S','U','R','T'};
-uint8_t buffer[sizeof(ControlPacket)];
+uint8_t buffer[4];
+uint8_t fodase[24];
 ControlPacket controlPacket;
+
+int offset = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_SPI3_Init(void);
+static void MX_USART6_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void USART6_Receive(uint8_t *_buffer)
+{
+	HAL_UART_Receive(&huart6, _buffer, sizeof(_buffer), HAL_MAX_DELAY);
+}
 /* USER CODE END 0 */
 
 /**
@@ -80,7 +89,7 @@ int main(void)
 	controlPacket.vw = 0;
 	controlPacket.solenoidPower = 2;
 	controlPacket.crc = 4;
-	memcpy(buffer, &controlPacket, sizeof(ControlPacket));
+//	memcpy(buffer, &controlPacket, sizeof(ControlPacket));
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -102,6 +111,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI3_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_NRF24_init();
   HAL_NRF24_TXModeConfig(TxAdress,123);
@@ -111,11 +121,37 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_NRF24_transmitData(buffer);
-	  HAL_Delay(100);
+//	  HAL_NRF24_transmitData(buffer);
+//	  HAL_Delay(100);
+//
+//	  controlPacket.vx++;
+//	  memcpy(buffer, &controlPacket, sizeof(ControlPacket));
 
-	  controlPacket.vx++;
-	  memcpy(buffer, &controlPacket, sizeof(ControlPacket));
+	  USART6_Receive(buffer);
+
+	  for (int i = 0; i < 4; i++)
+	  {
+		  fodase[i + offset] = buffer[i];
+	  }
+
+
+	  offset += 4;
+
+	  if (offset >= sizeof(ControlPacket) + 4) {
+		  offset = 0;
+
+		  uint8_t fodase2[20];
+
+		  for (int i = 2; i < 22; i++)
+		  {
+			  fodase2[i - 2] = fodase[i];
+		  }
+
+		  HAL_NRF24_transmitData(fodase2);
+//		  memcpy(&controlPacket, fodase2, sizeof(ControlPacket));
+
+	  }
+//	  memcpy(&controlPacket, buffer, sizeof(ControlPacket));
 
 //	  HAL_Delay(50);
     /* USER CODE END WHILE */
@@ -206,6 +242,39 @@ static void MX_SPI3_Init(void)
   /* USER CODE BEGIN SPI3_Init 2 */
 
   /* USER CODE END SPI3_Init 2 */
+
+}
+
+/**
+  * @brief USART6 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART6_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART6_Init 0 */
+
+  /* USER CODE END USART6_Init 0 */
+
+  /* USER CODE BEGIN USART6_Init 1 */
+
+  /* USER CODE END USART6_Init 1 */
+  huart6.Instance = USART6;
+  huart6.Init.BaudRate = 115200;
+  huart6.Init.WordLength = UART_WORDLENGTH_8B;
+  huart6.Init.StopBits = UART_STOPBITS_1;
+  huart6.Init.Parity = UART_PARITY_NONE;
+  huart6.Init.Mode = UART_MODE_TX_RX;
+  huart6.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart6.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART6_Init 2 */
+
+  /* USER CODE END USART6_Init 2 */
 
 }
 
