@@ -59,10 +59,14 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LED1_Pin GPIO_PIN_6
 #define LED1_GPIO_Port GPIOA
-#define CE3_Pin GPIO_PIN_0
-#define CE3_GPIO_Port GPIOD
-#define CS3_Pin GPIO_PIN_1
-#define CS3_GPIO_Port GPIOD
+#define USB_TX_Pin GPIO_PIN_6
+#define USB_TX_GPIO_Port GPIOC
+#define USB_RX_Pin GPIO_PIN_7
+#define USB_RX_GPIO_Port GPIOC
+#define CE_Pin GPIO_PIN_6
+#define CE_GPIO_Port GPIOB
+#define CSN_Pin GPIO_PIN_7
+#define CSN_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

@@ -13,7 +13,7 @@ Date   : 19/12/2022
 
 /*------------------------ Global Varaibles ----------------------------------*/
 
-extern SPI_HandleTypeDef hspi3;
+extern SPI_HandleTypeDef hspi1;
 
 
 /*-------------------------- Definitions --------------------------------------*/
@@ -22,12 +22,12 @@ extern SPI_HandleTypeDef hspi3;
 /* Private defines -----------------------------------------------------------*/
 #define LED_Pin GPIO_PIN_6
 #define LED_GPIO_Port GPIOA
-#define CSN_Pin GPIO_PIN_1
-#define CSN_GPIO_Port GPIOD
-#define CE_Pin GPIO_PIN_0
-#define CE_GPIO_Port GPIOD
+#define CSN_Pin GPIO_PIN_7
+#define CSN_GPIO_Port GPIOB
+#define CE_Pin GPIO_PIN_6
+#define CE_GPIO_Port GPIOB
 
-#define  NRF_Handler &hspi3
+#define  NRF_Handler &hspi1
 
 /* Memory Map */
 #define CONFIG_REG      (uint8_t)0x00  //Configuration Register
